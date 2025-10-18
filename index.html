@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delicii Raw Vegane - Magazine Online România</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #2d4a3e;
+            background: linear-gradient(135deg, #f8f6f0 0%, #e8e2d5 100%);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4a7c59;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: '🌱';
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2d4a3e;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #4a7c59;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            padding: 0.5rem;
+            background: #4a7c59;
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            background: #5a8a69;
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(74, 124, 89, 0.1), rgba(45, 74, 62, 0.1)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="leaves" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="25" cy="25" r="2" fill="%234a7c59" opacity="0.1"/><circle cx="75" cy="75" r="1.5" fill="%234a7c59" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23leaves)"/></svg>');
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #2d4a3e;
+            font-weight: 300;
+            letter-spacing: -2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #4a7c59;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #4a7c59, #5a8a69);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(74, 124, 89, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(74, 124, 89, 0.4);
+        }
+
+        /* Floating Elements */
+        .floating-leaf {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-leaf:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-leaf:nth-child(2) { top: 60%; right: 15%; animation-delay: 2s; }
+        .floating-leaf:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 4s; }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 3rem;
+            color: #2d4a3e;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        /* Products Section */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            height: 250px;
+            background: linear-gradient(135deg, #4a7c59, #5a8a69, #6b9b7a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(74, 124, 89, 0.3), rgba(90, 138, 105, 0.3));
+            z-index: 1;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #e74c3c;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .product-content {
+            padding: 2rem;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            color: #2d4a3e;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .product-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: #4a7c59;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #4a7c59, #5a8a69);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: linear-gradient(135deg, #5a8a69, #6b9b7a);
+            transform: translateY(-2px);
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .cart-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            color: #2d4a3e;
+        }
+
+        .cart-item-price {
+            color: #4a7c59;
+            font-weight: bold;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .quantity-btn {
+            background: #4a7c59;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cart-total {
+            text-align: center;
+            margin: 2rem 0;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2d4a3e;
+        }
+
+        .whatsapp-order {
+            width: 100%;
+            padding: 1rem;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .whatsapp-order:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+            border-radius: 20px;
+            margin: 2rem 0;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 4rem;
+        }
+
+        .about-text p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background-image: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(74, 124, 89, 0.3), rgba(90, 138, 105, 0.3));
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #4a7c59, #5a8a69);
+            color: white;
+            text-align: center;
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        .contact h2 {
+            color: white;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .contact-item {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-item h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .whatsapp-contact {
+            background: #25D366;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .whatsapp-contact:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #2d4a3e;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #4a7c59;
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.8);
+            }
+            100% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-content {
+                width: 95%;
+                padding: 1rem;
+            }
+        }
+
+        /* Scroll Effects */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 2rem;
+        }
+        
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .cart-icon.bounce {
+            animation: bounce 0.5s ease;
+        }
+        /* Hamburger menu */
+.hamburger {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #4a7c59;
+  transition: 0.3s;
+}
+
+.hamburger:hover {
+  transform: scale(1.1);
+}
+
+/* Mobile menu styling */
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    border-top: 1px solid #eee;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    display: none;
+  }
+
+  .nav-links.active {
+    display: flex;
+    animation: slideDown 0.4s ease;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Delicii Raw Vegane</a>
+                <ul class="nav-links">
+                    <li><a href="#acasa">Acasă</a></li>
+                    <li><a href="#despre">Despre Noi</a></li>
+                    <li><a href="#produse">Produse</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li>
+                        <div class="cart-icon" onclick="toggleCart()">
+                            🛒
+                            <span class="cart-count" id="cartCount">0</span>
+                        </div>
+                    </li>
+                </ul>
+                <!-- Hamburger Menu Button -->
+                <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="acasa" class="hero">
+        <div class="floating-leaf">🍃</div>
+        <div class="floating-leaf">🌿</div>
+        <div class="floating-leaf">🍃</div>
+        
+        <div class="hero-content">
+            <h1>Viață Naturală Pură</h1>
+            <p class="subtitle">Descoperă frumusețea bucătăriei raw vegane</p>
+            <a href="#produse" class="cta-button">Explorează Produsele</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="despre" class="section">
+        <div class="container">
+            <div class="about fade-in">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Filosofia Noastră</h2>
+                        <p>Bine ai venit într-o lume unde mâncarea este medicament, unde fiecare înghițitură îți hrănește corpul și sufletul. Călătoria noastră raw vegană celebrează esența pură a bogăției naturii.</p>
+                        <p>Credem în puterea transformatoare a nutriției pe bază de plante, creând rețete delicioase care onorează atât sănătatea ta, cât și planeta pe care o numim acasă.</p>
+                        <p>Alătură-te nouă în descoperirea modului în care ingredientele simple și naturale pot crea experiențe culinare extraordinare care energizează, vindecă și inspiră.</p>
+                    </div>
+                    <div class="about-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <!-- Products Section -->
+<section id="produse" class="section">
+  <div class="container">
+    <h2 class="fade-in">Produsele Noastre</h2>
+
+    <!-- BILUȚE -->
+    <h3 style="text-align:center; margin-top:40px; color:#4a7c59;">Biluțe Raw</h3>
+    <div class="products">
+      <div class="product-card fade-in">
+        <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1607082349566-187342175e2b?w=800&q=80');"></div>
+        <div class="product-content">
+          <h3 class="product-title">Biluțe cu lămâie</h3>
+          <p class="product-description">Răcoritoare și fine, cu aromă naturală de lămâie bio și fulgi de cocos.</p>
+          <div class="product-price">3 LEI</div>
+          <button class="add-to-cart" onclick="addToCart('Biluțe cu lămâie',3,'🍋')">Adaugă în Coș</button>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1565958011705-44e2113db3f0?w=800&q=80');"></div>
+        <div class="product-content">
+          <h3 class="product-title">Biluțe cu ciocolată și alune de pădure</h3>
+          <p class="product-description">Cremă densă de cacao raw și alune de pădure prăjite lent.</p>
+          <div class="product-price">3 LEI</div>
+          <button class="add-to-cart" onclick="addToCart('Biluțe cu ciocolată și alune de pădure',3,'🍫')">Adaugă în Coș</button>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?w=800&q=80');"></div>
+        <div class="product-content">
+          <h3 class="product-title">Biluțe cu cocos (Raffaello)</h3>
+          <p class="product-description">Cremă de caju, cocos și migdale – delicate și aromate.</p>
+          <div class="product-price">3 LEI</div>
+          <button class="add-to-cart" onclick="addToCart('Biluțe cu cocos (Raffaello)',3,'🥥')">Adaugă în Coș</button>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=800&q=80');"></div>
+        <div class="product-content">
+          <h3 class="product-title">Biluțe cu ciocolată</h3>
+          <p class="product-description">Mix bogat de cacao, curmale și unt de migdale pentru iubitorii de ciocolată.</p>
+          <div class="product-price">3 LEI</div>
+          <button class="add-to-cart" onclick="addToCart('Biluțe cu ciocolată',3,'🍫')">Adaugă în Coș</button>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1590080875831-d1a2a9c79809?w=800&q=80');"></div>
+        <div class="product-content">
+          <h3 class="product-title">Biluțe cu arahide</h3>
+          <p class="product-description">Textură crocantă, dulceață echilibrată, 100% naturală.</p>
+          <div class="product-price">3 LEI</div>
+          <button class="add-to-cart" onclick="addToCart('Biluțe cu arahide',3,'🥜')">Adaugă în Coș</button>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=800&q=80');"></div>
+        <div class="product-content">
+          <h3 class="product-title">Biluțe cu căpșuni</h3>
+          <p class="product-description">Note dulci-acrișoare din căpșuni deshidratate și migdale crude.</p>
+          <div class="product-price">3 LEI</div>
+          <button class="add-to-cart" onclick="addToCart('Biluțe cu căpșuni',3,'🍓')">Adaugă în Coș</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BATOANE -->
+    <h3 style="text-align:center; margin-top:60px; color:#4a7c59;">Batoane Raw</h3>
+    <div class="products">
+      <div class="product-card fade-in">
+        <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1590080876276-f0c9536c3af7?w=800&q=80');"></div>
+        <div class="product-content">
+          <h3 class="product-title">Baton cu arahide (Snickers)</h3>
+          <p class="product-description">Straturi fine de caramel raw și arahide coapte, fără zahăr rafinat.</p>
+          <div class="product-price">12 LEI</div>
+          <button class="add-to-cart" onclick="addToCart('Baton cu arahide (Snickers)',12,'🍯')">Adaugă în Coș</button>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80');"></div>
+        <div class="product-content">
+          <h3 class="product-title">Baton cu cocos (Bounty)</h3>
+          <p class="product-description">Umplutură moale de cocos învelită în ciocolată neagră raw.</p>
+          <div class="product-price">12 LEI</div>
+          <button class="add-to-cart" onclick="addToCart('Baton cu cocos (Bounty)',12,'🥥')">Adaugă în Coș</button>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1590608897129-79da98d159e9?w=800&q=80');"></div>
+        <div class="product-content">
+          <h3 class="product-title">Baton cu arahide și alune (Mars)</h3>
+          <p class="product-description">Crema densă de ciocolată și caramel raw cu arahide.</p>
+          <div class="product-price">12 LEI</div>
+          <button class="add-to-cart" onclick="addToCart('Baton cu arahide și alune (Mars)',12,'🍫')">Adaugă în Coș</button>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1617117099504-5f94a0a6cccf?w=800&q=80');"></div>
+        <div class="product-content">
+          <h3 class="product-title">Baton cu migdale și cocos (Twix)</h3>
+          <p class="product-description">Deliciu raw din migdale, cocos și ciocolată naturală.</p>
+          <div class="product-price">12 LEI</div>
+          <button class="add-to-cart" onclick="addToCart('Baton cu migdale și cocos (Twix)',12,'🌰')">Adaugă în Coș</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÎNGHEȚATĂ -->
+    <h3 style="text-align:center; margin-top:60px; color:#4a7c59;">Înghețată Raw</h3>
+    <div class="products">
+      <div class="product-card fade-in">
+        <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&q=80');"></div>
+        <div class="product-content">
+          <h3 class="product-title">Înghețată cu fructe</h3>
+          <p class="product-description">Mix natural din fructe de sezon și cremă de caju.</p>
+          <div class="product-price">14 LEI</div>
+          <button class="add-to-cart" onclick="addToCart('Înghețată cu fructe',14,'🍓')">Adaugă în Coș</button>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1591994843078-aceab27da3a3?w=800&q=80');"></div>
+        <div class="product-content">
+          <h3 class="product-title">Înghețată cu unt de arahide</h3>
+          <p class="product-description">Textură cremoasă și aromă intensă de arahide crude.</p>
+          <div class="product-price">14 LEI</div>
+          <button class="add-to-cart" onclick="addToCart('Înghețată cu unt de arahide',14,'🥜')">Adaugă în Coș</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TORTURI -->
+    <h3 style="text-align:center; margin-top:60px; color:#4a7c59;">Torturi Raw</h3>
+    <div class="products">
+      <div class="product-card fade-in">
+        <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1601972599720-b1e4e3e3e7da?w=800&q=80');"></div>
+        <div class="product-content">
+          <h3 class="product-title">Tort cu ciocolată și alune</h3>
+          <p class="product-description">Cremă fină de ciocolată raw și alune prăjite.</p>
+          <div class="product-price">160 LEI</div>
+          <button class="add-to-cart" onclick="addToCart('Tort cu ciocolată și alune',160,'🍫')">Adaugă în Coș</button>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80');"></div>
+        <div class="product-content">
+          <h3 class="product-title">Carrot Cake (Tort cu morcovi)</h3>
+          <p class="product-description">Textură umedă cu morcovi rași, scorțișoară și cremă de caju.</p>
+          <div class="product-price">160 LEI</div>
+          <button class="add-to-cart" onclick="addToCart('Carrot Cake',160,'🥕')">Adaugă în Coș</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALTELE -->
+    <h3 style="text-align:center; margin-top:60px; color:#4a7c59;">Altele</h3>
+    <div class="products">
+      <div class="product-card fade-in">
+        <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1551218808-94e220e084d2?w=800&q=80');"></div>
+        <div class="product-content">
+          <h3 class="product-title">Cutie prăjituri mixte</h3>
+          <p class="product-description">Selecție de mini-prăjituri raw pentru cadouri sau degustare.</p>
+          <div class="product-price">160 LEI</div>
+          <button class="add-to-cart" onclick="addToCart('Cutie prăjituri mixte',160,'🍰')">Adaugă în Coș</button>
+        </div>
+      </div>
+
+      <div class="product-card fade-in">
+        <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1514516430039-1166f008b0de?w=800&q=80');"></div>
+        <div class="product-content">
+          <h3 class="product-title">Monoporție</h3>
+          <p class="product-description">Porție individuală de desert raw, perfectă pentru degustare.</p>
+          <div class="product-price">20 LEI</div>
+          <button class="add-to-cart" onclick="addToCart('Monoporție',20,'🍮')">Adaugă în Coș</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <div class="contact fade-in">
+                <div style="padding: 4rem;">
+                    <h2>Contactează-ne</h2>
+                    <p style="margin-bottom: 3rem; font-size: 1.2rem;">Gata să îți transformi relația cu mâncarea? Să începem această călătorie frumoasă împreună.</p>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <h3>📱 WhatsApp</h3>
+                            <p>Comandă direct prin WhatsApp</p>
+                            <a href="https://wa.me/40712345678?text=Salut! Vreau să aflu mai multe despre produsele raw vegane." class="whatsapp-contact">
+                                📱 Scrie pe WhatsApp
+                            </a>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h3>📍 Livrare</h3>
+                            <p>Livrăm în toată România</p>
+                            <p><strong>București:</strong> 2-4 ore</p>
+                            <p><strong>Țară:</strong> 24-48 ore</p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h3>⏰ Program</h3>
+                            <p>Luni - Vineri: 8:00 - 20:00</p>
+                            <p>Sâmbătă: 9:00 - 18:00</p>
+                            <p>Duminică: 10:00 - 16:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#" title="Instagram">📷</a>
+                <a href="#" title="Facebook">📘</a>
+                <a href="#" title="TikTok">🎵</a>
+                <a href="#" title="YouTube">📺</a>
+            </div>
+            <p>&copy; 2024 Delicii Raw Vegane. Hrănim vieți, o rețetă odată.</p>
+            <p>🇷🇴 Produs în România cu dragoste pentru natură</p>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>🛒 Coșul Meu</h2>
+                <button class="close-cart" onclick="toggleCart()">&times;</button>
+            </div>
+            <div id="cartItems"></div>
+            <div class="cart-total" id="cartTotal">Total: 0 LEI</div>
+            <button class="whatsapp-order" onclick="orderViaWhatsApp()">
+                📱 Comandă prin WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Cart functionality
+        let cart = [];
+        let cartCount = 0;
+        let cartTotal = 0;
+
+        function addToCart(name, price, icon) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, icon, quantity: 1 });
+            }
+            
+            updateCartDisplay();
+            
+            // Show success animation
+            const event = new CustomEvent('cartUpdated');
+            document.dispatchEvent(event);
+        }
+
+        function removeFromCart(name) {
+            cart = cart.filter(item => item.name !== name);
+            updateCartDisplay();
+        }
+
+        function updateQuantity(name, change) {
+            const item = cart.find(item => item.name === name);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(name);
+                } else {
+                    updateCartDisplay();
+                }
+            }
+        }
+
+        function updateCartDisplay() {
+            cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            document.getElementById('cartCount').textContent = cartCount;
+            document.getElementById('cartTotal').textContent = `Total: ${cartTotal} LEI`;
+            
+            const cartItemsContainer = document.getElementById('cartItems');
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<div class="empty-cart">Coșul tău este gol 🛒</div>';
+                return;
+            }
+            
+            cartItemsContainer.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.icon} ${item.name}</div>
+                        <div class="cart-item-price">${item.price} LEI</div>
+                    </div>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" onclick="updateQuantity('${item.name}', -1)">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="quantity-btn" onclick="updateQuantity('${item.name}', 1)">+</button>
+                        <button class="quantity-btn" onclick="removeFromCart('${item.name}')" style="background: #e74c3c; margin-left: 1rem;">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function orderViaWhatsApp() {
+            if (cart.length === 0) {
+                alert('Coșul tău este gol! Adaugă produse înainte de a comanda.');
+                return;
+            }
+            
+            let message = `🌱 *COMANDĂ DELICII RAW VEGANE* 🌱\n\n`;
+            message += `📋 *Produse comandate:*\n`;
+            
+            cart.forEach(item => {
+                message += `${item.icon} ${item.name}\n`;
+                message += `   Cantitate: ${item.quantity}\n`;
+                message += `   Preț: ${item.price} LEI x ${item.quantity} = ${item.price * item.quantity} LEI\n\n`;
+            });
+            
+            message += `💰 *TOTAL: ${cartTotal} LEI*\n\n`;
+            message += `📍 Vă rog să confirmați adresa de livrare și să îmi spuneți dacă aveți preferințe speciale pentru comandă.\n\n`;
+            message += `🚚 Opțiuni de livrare:\n`;
+            message += `• București: 2-4 ore (15 LEI)\n`;
+            message += `• Național: 24-48 ore (25 LEI)\n\n`;
+            message += `💳 Plata se poate face cash la livrare sau transfer bancar.\n\n`;
+            message += `Mulțumesc pentru încredere! 🙏`;
+            
+            const whatsappUrl = `https://wa.me/40712345678?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 100) {
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 30px rgba(0,0,0,0.15)';
+            } else {
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Product card hover effects
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Close cart modal when clicking outside
+        document.getElementById('cartModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                toggleCart();
+            }
+        });
+
+        // Add to cart success animation
+        document.addEventListener('cartUpdated', () => {
+            const cartIcon = document.querySelector('.cart-icon');
+            cartIcon.style.transform = 'scale(1.2)';
+            cartIcon.style.background = '#e74c3c';
+            
+            setTimeout(() => {
+                cartIcon.style.transform = 'scale(1)';
+                cartIcon.style.background = '#4a7c59';
+            }, 300);
+        });
+
+        // Add ripple effects to buttons
+        document.querySelectorAll('.add-to-cart, .cta-button, .whatsapp-order, .whatsapp-contact').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255,255,255,0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // WhatsApp floating button
+        const createFloatingWhatsApp = () => {
+            const floatingBtn = document.createElement('div');
+            floatingBtn.innerHTML = '💬';
+            floatingBtn.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
+                background: #25D366;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+                cursor: pointer;
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+                z-index: 1000;
+                transition: all 0.3s ease;
+                animation: pulse 2s infinite;
+            `;
+            
+            floatingBtn.addEventListener('click', () => {
+                const message = 'Salut! Sunt interesat(ă) de produsele raw vegane. Poți să îmi dai mai multe informații?';
+                const whatsappUrl = `https://wa.me/40712345678?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+            });
+            
+            floatingBtn.addEventListener('mouseenter', () => {
+                floatingBtn.style.transform = 'scale(1.1)';
+                floatingBtn.style.boxShadow = '0 6px 25px rgba(37, 211, 102, 0.6)';
+            });
+            
+            floatingBtn.addEventListener('mouseleave', () => {
+                floatingBtn.style.transform = 'scale(1)';
+                floatingBtn.style.boxShadow = '0 4px 20px rgba(37, 211, 102, 0.4)';
+            });
+            
+            document.body.appendChild(floatingBtn);
+        };
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('cartModal');
+                if (modal.style.display === 'block') {
+                    toggleCart();
+                }
+            }
+        });
+        // Hamburger menu toggle
+function toggleMenu() {
+  document.querySelector('.nav-links').classList.toggle('active');
+}
+
+// Close mobile menu when a link is clicked
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.remove('active');
+  });
+});
+
+
+        // Initialize
+        updateCartDisplay();
+        createFloatingWhatsApp();
+    </script>
+</body>
+</html>
